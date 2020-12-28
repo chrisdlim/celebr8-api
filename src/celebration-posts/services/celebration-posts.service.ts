@@ -1,32 +1,28 @@
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
-import { CelebrationPost, CelebrationPostDto } from '../schemas/celebration-post.schema';
-import { CelebrationPost as CelebrationPostInterface } from '../interfaces/celebration-post.interface';
-import { Celebration } from '../../celebrations/schemas/celebrations.schema';
-import { Celebration as CelebrationInterface } from '../../celebrations/interfaces/celebration.interface';
+import { CelebrationPost, CelebrationPostDocument, CelebrationPostDto } from '../schemas/celebration-post.schema';
+import { Celebration, CelebrationDocument } from '../../celebrations/schemas/celebrations.schema';
 
 @Injectable()
 export class CelebrationPostsService {
   constructor(
-    @Inject(CelebrationPost.name) private celebrationPostModel: Model<CelebrationPostInterface>,
-    @Inject(Celebration.name) private celebrationModel: Model<CelebrationInterface>,
+    @Inject(CelebrationPost.name) private celebrationPostModel: Model<CelebrationPostDocument>,
+    @Inject(Celebration.name) private celebrationModel: Model<CelebrationDocument>,
     ) {}
 
 
   async createOne(celebrationId: string, celebrationPostDto: CelebrationPostDto): Promise<CelebrationPost> {
-    const celebration = await this.celebrationModel.findOne({ _id: celebrationId })
-    console.log(celebration)
     const celebrationPost = new this.celebrationPostModel({ 
-      ...celebrationPostDto, 
-      celebration,
+      ...celebrationPostDto,
+      celebration: Types.ObjectId(celebrationId),
     });
-
     return celebrationPost.save();
   }
 
   async findAll(): Promise<CelebrationPost[]> {
     return this.celebrationPostModel
       .find()
+      .populate('celebration', null, this.celebrationModel)
       .exec();
   }
 
@@ -47,5 +43,12 @@ export class CelebrationPostsService {
 
   async deleteAll(): Promise<void> {
     return this.celebrationPostModel.deleteMany().exec();
+  }
+
+  async findByCelebrationId(celebrationId: string) {
+    return this.celebrationPostModel.find({
+      'celebration._id': Types.ObjectId(celebrationId)
+    })
+    .exec();
   }
 }

@@ -10,9 +10,6 @@ export class Celebration {
   @Prop()
   event: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'CelebrationPost' })
-  posts: CelebrationPost[];
-
   @Prop()
   description: string;
 

@@ -1,16 +1,10 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
-import { Celebration, CelebrationDto } from '../schemas/celebrations.schema';
-import { Celebration as CelebrationInterface } from '../interfaces/celebration.interface';
-import { CelebrationPost } from '../../celebration-posts/schemas/celebration-post.schema';
-import { CelebrationPost as CelebrationPostInterface } from '../../celebration-posts/interfaces/celebration-post.interface';
+import { Celebration, CelebrationDocument, CelebrationDto } from '../schemas/celebrations.schema';
+
 @Injectable()
 export class CelebrationsService {
-  constructor(
-    @Inject(Celebration.name) private celebrationModel: Model<CelebrationInterface>,
-    @Inject(CelebrationPost.name) private celebrationPostModel: Model<CelebrationPostInterface>,
-    
-  ) {}
+  constructor(@Inject(Celebration.name) private celebrationModel: Model<CelebrationDocument>) {}
 
 
   async createOne(celebrationDto: CelebrationDto): Promise<Celebration> {
@@ -25,7 +19,9 @@ export class CelebrationsService {
   }
 
   async findOne(_id: string): Promise<Celebration> {
-    return await this.celebrationModel.findOne({ _id }).exec();
+    return await this.celebrationModel
+      .findOne({ _id })
+      .exec();
   }
 
   async deleteOne(_id: string): Promise<any> {

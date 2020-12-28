@@ -14,17 +14,14 @@ export class CelebrationPost {
   @Prop()
   message: string;
 
-  @Prop({ type: Types.ObjectId, ref: Celebration.name })
+  @Prop({ type: Types.ObjectId })
   celebration: Celebration;
 
 }
 
 export class CelebrationPostDto {
-  event: string;
-  description: string;
-  celebratee: string;
+  message: string;
   author: string;
-  celebration?: Celebration;
 }
 
 export const CelebrationPostSchema = SchemaFactory.createForClass(CelebrationPost);
