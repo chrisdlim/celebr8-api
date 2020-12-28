@@ -3,16 +3,30 @@ import { Document } from 'mongoose';
 
 export type CelebrationDocument = Celebration & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Celebration {
-  @Prop()
-  name: string;
 
   @Prop()
-  age: number;
+  event: string;
 
   @Prop()
-  breed: string;
+  posts: any[];
+
+  @Prop()
+  description: string;
+
+  @Prop()
+  celebratee: string;
+
+  @Prop()
+  author: string;
+}
+
+export class CelebrationDto {
+  event: string;
+  description: string;
+  celebratee: string;
+  author: string;
 }
 
 export const CelebrationSchema = SchemaFactory.createForClass(Celebration);

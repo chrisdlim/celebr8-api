@@ -1,6 +1,6 @@
 import { Connection } from 'mongoose';
-import { Cat, CatSchema } from 'src/test/cats/schemas/cat.schema';
-import { Celebration, CelebrationSchema } from 'src/test/celebrations/schemas/celebrations.schema';
+import { Celebration, CelebrationSchema } from '../../celebrations/schemas/celebrations.schema';
+import { Cat, CatSchema } from '../../test/cats/schemas/cat.schema';
 import { mongooseProviderNames } from './mongoose.providers';
 
 export const modelProviders = [
@@ -12,8 +12,13 @@ export const modelProviders = [
   {
     provide: Celebration.name,
     useFactory: (connection: Connection) => connection.model('celebrations', CelebrationSchema),
-    inject: [mongooseProviderNames.CELEBRATIONS_CONNECTION],
+    inject: [mongooseProviderNames.CELEBR8_CONNECTION],
   },
+  // {
+  //   provide: CelebrationPost.name,
+  //   useFactory: (connection: Connection) => connection.model('posts', CelebrationPostSchema),
+  //   inject: [mongooseProviderNames.CELEBR8_CONNECTION],
+  // },
 ];
 
 /**
