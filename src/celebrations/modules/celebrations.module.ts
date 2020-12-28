@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { CelebrationPostsModule } from 'src/celebration-posts/modules/celebration-posts.module';
 import { modelProviders } from 'src/database/mongoose/model.providers';
 import { MongooseModuleC8 } from 'src/database/mongoose/mongoose.module';
 import { CelebrationsController } from '../controllers/celebrations.controller';

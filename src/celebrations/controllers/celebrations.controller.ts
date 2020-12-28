@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Celebration } from '../schemas/celebrations.schema';
 import { CelebrationsService } from '../services/celebrations.service';
 
@@ -29,11 +29,6 @@ export class CelebrationsController {
   @Post(':id')
   async updateOne(@Param() params, @Body() body): Promise<Celebration> {
     return await this.celebrationService.updateOne(params.id, body);
-  }
-  
-  @Post('random')
-  async createRandom(): Promise<Celebration> {
-    return await this.celebrationService.addRandomCelebration();
   }
 
   @Delete('dev/delete')
