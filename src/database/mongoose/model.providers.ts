@@ -1,6 +1,6 @@
 import { Connection } from 'mongoose';
 import { Celebration, CelebrationSchema } from '../../celebrations/schemas/celebrations.schema';
-import { Cat, CatSchema } from '../../test/cats/schemas/cat.schema';
+import { Cat, CatSchema } from '../../../test/cats/schemas/cat.schema';
 import { mongooseProviderNames } from './mongoose.providers';
 
 export const modelProviders = [
