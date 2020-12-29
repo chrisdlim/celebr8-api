@@ -11,10 +11,10 @@ export class CelebrationPostsController {
     return await this.celebrationPostService.findAll();
   }
 
-  // @Get(':id')
-  // async getCelebrationPostById(@Param() params): Promise<CelebrationPost> {
-  //   return await this.celebrationPostService.findOne(params.id);
-  // }
+  @Get(':id')
+  async getCelebrationPostById(@Param() params): Promise<CelebrationPost> {
+    return await this.celebrationPostService.findOne(params.id);
+  }
 
   @Delete(':id')
   async deleteCelebrationPostById(@Param() params): Promise<any> {
@@ -36,8 +36,9 @@ export class CelebrationPostsController {
     return await this.celebrationPostService.deleteAll();
   }
 
-  @Get(':celebrationId')
+  @Get('celebration/:celebrationId')
   async findByCelebrationId(@Param() params) {
+    console.log(params)
     return await this.celebrationPostService.findByCelebrationId(params.celebrationId);
   }
 }

@@ -47,7 +47,7 @@ export class CelebrationPostsService {
 
   async findByCelebrationId(celebrationId: string) {
     return this.celebrationPostModel.find({
-      'celebration._id': Types.ObjectId(celebrationId)
+      "celebration": Types.ObjectId(celebrationId)
     })
     .exec();
   }

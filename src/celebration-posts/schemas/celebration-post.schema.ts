@@ -15,7 +15,7 @@ export class CelebrationPost {
   message: string;
 
   @Prop({ type: Types.ObjectId })
-  celebration: Celebration;
+  celebration: Types.ObjectId;
 
 }
 
