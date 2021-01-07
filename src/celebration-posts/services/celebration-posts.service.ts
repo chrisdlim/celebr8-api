@@ -45,9 +45,9 @@ export class CelebrationPostsService {
     return this.celebrationPostModel.deleteMany().exec();
   }
 
-  async findByCelebrationId(celebrationId: string) {
+  async findPostsByCelebrationId(celebrationId: string) {
     return this.celebrationPostModel.find({
-      "celebration": Types.ObjectId(celebrationId)
+      'celebration': Types.ObjectId(celebrationId)
     })
     .exec();
   }

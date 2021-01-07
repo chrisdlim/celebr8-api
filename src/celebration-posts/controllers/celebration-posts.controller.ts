@@ -37,8 +37,7 @@ export class CelebrationPostsController {
   }
 
   @Get('celebration/:celebrationId')
-  async findByCelebrationId(@Param() params) {
-    console.log(params)
-    return await this.celebrationPostService.findByCelebrationId(params.celebrationId);
+  async findPostsByCelebrationId(@Param() params) {
+    return await this.celebrationPostService.findPostsByCelebrationId(params.celebrationId);
   }
 }
