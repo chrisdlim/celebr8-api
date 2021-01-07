@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
+import { CelebrationPost } from '../../celebration-posts/schemas/celebration-post.schema';
 
 export type CelebrationDocument = Celebration & Document;
 
@@ -8,9 +9,6 @@ export class Celebration {
 
   @Prop()
   event: string;
-
-  @Prop()
-  posts: any[];
 
   @Prop()
   description: string;
